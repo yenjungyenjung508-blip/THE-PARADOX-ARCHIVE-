@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#171522">
+<title>THE PARADOX ARCHIVE｜悖論失物招領處</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+:root{--bg:#f4f0e8;--ink:#211f2b;--purple:#7661bb;--orange:#ff704d;--paper:#fffdf8;--line:#ded8ce;--muted:#817b87}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans TC',sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+header{background:var(--ink);color:white;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-weight:900;letter-spacing:1px;font-size:16px}
+.logo span{color:#ff997e}
+.logo small{display:block;color:#a7a0b9;font:9px 'DM Mono',monospace;letter-spacing:2px;margin-top:5px}
+.status{font:10px 'DM Mono',monospace;color:#a7e4bd}
+.status:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#8ce4ad;margin-right:8px}
+.wrap{max-width:1150px;margin:auto;padding:0 24px}
+.hero{padding:65px 0 43px;display:grid;grid-template-columns:1.4fr .6fr;gap:25px;align-items:center}
+.kicker{font:11px 'DM Mono',monospace;color:var(--purple);letter-spacing:2px}
+h1{font-size:clamp(40px,7vw,76px);line-height:1.08;letter-spacing:-3px;margin:18px 0}
+h1 em{color:var(--orange);font-style:normal}
+.hero p{max-width:600px;color:#625d68;font-size:14px;line-height:2}
+.stamp{border:2px solid var(--orange);color:var(--orange);padding:22px;text-align:center;transform:rotate(4deg);font-weight:900;font-size:20px;border-radius:8px}
+.stamp small{display:block;font:10px 'DM Mono',monospace;margin-top:9px}
+.ticker{overflow:hidden;background:#e5ddf8;border-top:1px solid #d0c4ee;border-bottom:1px solid #d0c4ee;white-space:nowrap;padding:11px 0;font:11px 'DM Mono',monospace;color:#58468f}
+.ticker div{display:inline-block;animation:move 25s linear infinite}
+@keyframes move{to{transform:translateX(-40%)}}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:28px 0 18px}
+.btn{border:1px solid var(--line);background:var(--paper);padding:11px 15px;border-radius:7px;font-size:12px;font-weight:700;color:var(--ink)}
+.btn:hover{border-color:var(--purple);transform:translateY(-1px)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:white}
+.btn.hot{background:var(--orange);border-color:var(--orange);color:white}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:7px;background:var(--paper);padding:12px;color:var(--ink);outline:none;font-size:12px}
+input:focus,select:focus,textarea:focus{border-color:var(--purple)}
+label{font-size:11px;font-weight:700;display:block;margin:13px 0 7px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:30px 0 15px}
+.sectionhead h2{font-size:20px;margin:0;letter-spacing:-.5px}
+.sectionhead p{margin:5px 0 0;font-size:11px;color:var(--muted)}
+.count{font:10px 'DM Mono',monospace;color:var(--purple)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:18px;min-width:0;display:flex;flex-direction:column}
+.card:nth-child(3n+2){background:#fbf7ff}
+.cardtop{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:13px}
+.id{font:10px 'DM Mono',monospace;color:var(--muted)}
+.tag{font-size:9px;padding:5px 8px;border-radius:4px;background:#ece5fc;color:#6550a0;white-space:nowrap}
+.tag.red{background:#ffe6de;color:#a6402a}
+.card h3{font-size:17px;line-height:1.65;margin:0 0 12px;overflow-wrap:anywhere}
+.label{font:9px 'DM Mono',monospace;letter-spacing:1px;color:var(--muted);margin:10px 0 5px}
+.description{font-size:12px;line-height:1.9;color:#56515d;overflow-wrap:anywhere}
+.goal{padding:11px;background:#f0ece5;border-left:3px solid var(--orange);font-size:12px;line-height:1.8;margin-top:6px;overflow-wrap:anywhere}
+.cardbottom{margin-top:auto;padding-top:17px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.score{font:10px 'DM Mono',monospace;color:var(--orange)}
+.smallbtn{border:0;background:transparent;color:var(--purple);font-size:11px;font-weight:700;padding:5px 0}
+.smallbtn:hover{text-decoration:underline}
+.empty{padding:50px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:25px 0}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:23px}
+.panel h2{font-size:20px;margin:0 0 8px}
+.panel>p{font-size:12px;line-height:1.8;color:var(--muted)}
+.result{background:#f0ece5;border-radius:8px;padding:16px;margin-top:16px;font-size:12px;line-height:2;min-height:80px;overflow-wrap:anywhere}
+.result strong{color:var(--purple)}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.full{grid-column:1/-1}
+footer{margin-top:55px;background:var(--ink);color:#a9a2b9;padding:27px 20px;text-align:center;font:10px/2 'DM Mono',monospace}
+footer strong{color:white}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,15px);opacity:0;transition:.2s;pointer-events:none;background:var(--ink);color:white;padding:12px 18px;border-radius:8px;font-size:12px;z-index:5;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.stamp{max-width:280px}.split{grid-template-columns:1fr}}
+@media(max-width:540px){.wrap{padding:0 15px}.grid{grid-template-columns:1fr}.hero{padding:42px 0 28px}h1{letter-spacing:-2px}.stamp{max-width:220px}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}header{padding:15px}.status{font-size:9px}.sectionhead h2{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">THE PARADOX <span>ARCHIVE</span><small>INSTITUTE OF QUESTIONABLE INQUIRIES</small></div>
+  <div class="status">ARCHIVE ONLINE</div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="kicker">VOL. 001 / RESEARCH WITHOUT DIRECTION</div>
+      <h1>有些問題，<br>連答案都想<br><em>離職。</em></h1>
+      <p>歡迎來到悖論失物招領處。我們專門保存那些問題與題目敘述互不相干、研究方法令人困惑、即使證明成功也毫無改善的學術疑案。</p>
+      <div class="toolbar">
+        <button class="btn primary" onclick="randomQuestion()">抽取一個問題 ↗</button>
+        <button class="btn" onclick="document.getElementById('submit').scrollIntoView({behavior:'smooth'})">提交你的研究</button>
+      </div>
+    </div>
+    <div class="stamp">邏輯不在<br>服務範圍內<small>LOGIC NOT FOUND · 404</small></div>
+  </section>
+</div>
+
+<div class="ticker"><div>　UNSOLVABLE QUESTIONS　✳　MISALIGNED STATEMENTS　✳　UNNECESSARY PROOFS　✳　PEER REVIEWED BY NO ONE　✳　LOGIC PENDING　✳　UNSOLVABLE QUESTIONS　✳　MISALIGNED STATEMENTS　✳　UNNECESSARY PROOFS　✳　</div></div>
+
+<div class="wrap">
+  <div class="sectionhead">
+    <div><h2>問題典藏庫</h2><p>每一道題目都在努力避開自己的主題。</p></div>
+    <div class="count" id="count">ARCHIVE / 000</div>
+  </div>
+
+  <div class="toolbar">
+    <input id="search" placeholder="搜尋問題、題目敘述或關鍵字……" style="flex:2;min-width:190px" oninput="render()">
+    <select id="filter" style="flex:1;min-width:150px" onchange="render()">
+      <option value="all">全部研究領域</option>
+      <option value="數學">數學失序</option>
+      <option value="物理">物理迷航</option>
+      <option value="生物">生物誤會</option>
+      <option value="哲學">哲學迷霧</option>
+      <option value="日常">日常異常</option>
+    </select>
+    <select id="sort" style="flex:1;min-width:125px" onchange="render()">
+      <option value="default">典藏順序</option>
+      <option value="high">荒謬指數優先</option>
+      <option value="low">荒謬指數反向</option>
+    </select>
+  </div>
+
+  <div id="cards" class="grid"></div>
+
+  <div class="split">
+    <section class="panel">
+      <div class="kicker">AUTOMATED NONSENSE ENGINE</div>
+      <h2 style="margin-top:12px">命題錯位產生器</h2>
+      <p>從不同領域抽取題幹、敘述與目標，合成一題結構完整、邏輯失聯的研究命題。</p>
+      <label for="difficulty">錯位程度</label>
+      <select id="difficulty">
+        <option value="1">輕度錯位：還看得出題目</option>
+        <option value="2" selected>重度錯位：關係開始消失</option>
+        <option value="3">完全失聯：每句都像來自不同宇宙</option>
+      </select>
+      <div class="actions" style="margin-top:14px"><button class="btn hot" onclick="generate()">生成荒謬命題 ↗</button></div>
+      <div id="generated" class="result">等待生成。請放心，這裡沒有標準答案。</div>
+      <button class="smallbtn" onclick="saveGenerated()">＋ 將生成題目收入典藏庫</button>
+    </section>
+
+    <section class="panel" id="submit">
+      <div class="kicker">CONTRIBUTE TO THE ARCHIVE</div>
+      <h2 style="margin-top:12px">提交你的問題</h2>
+      <p>請提供一個問題，以及一段與問題沒有任何必要關係的題目敘述。</p>
+      <form id="submitForm">
+        <label for="newTitle">研究問題</label>
+        <input id="newTitle" maxlength="100" required placeholder="例如：如何測量一朵雲的社交能力？">
+        <label for="newDesc">題目敘述</label>
+        <textarea id="newDesc" maxlength="500" required placeholder="例如：已知冰箱有四條腿，求出星期二的平方根。"></textarea>
+        <div class="formgrid">
+          <div><label for="newGoal">真正要回答的問題</label><input id="newGoal" maxlength="200" required placeholder="例如：證明鉛筆有方向感。"></div>
+          <div><label for="newCat">研究領域</label><select id="newCat"><option>數學</option><option>物理</option><option>生物</option><option>哲學</option><option>日常</option></select></div>
+        </div>
+        <div class="actions"><button class="btn primary" type="submit">正式提交研究</button></div>
+      </form>
+    </section>
+  </div>
+
+  <div class="sectionhead">
+    <div><h2>研究院年度指標</h2><p>統計方法尚未通過統計學審查。</p></div>
+    <div class="count">LIVE METRICS</div>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="label">ARCHIVED QUESTIONS</div><h3 id="metricCount" style="font-size:32px">000</h3><div class="description">累積被保存的問題數量。</div></div>
+    <div class="card"><div class="label">LOGICAL ALIGNMENT</div><h3 style="font-size:32px">0.003%</h3><div class="description">數值越低，研究越有本院特色。</div></div>
+    <div class="card"><div class="label">UNNECESSARY PROOFS</div><h3 id="metricProof" style="font-size:32px">∞</h3><div class="description">仍有無數問題等待不必要的證明。</div></div>
+  </div>
+</div>
+
+<footer><strong>THE PARADOX ARCHIVE</strong><br>Center for Unnecessary Questions & Misaligned Statements<br>所有題目皆為虛構創作。任何與真實研究、真實人物或真實冰箱相似之處，皆不構成研究成果。</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const base=[
+{cat:'數學',title:'請證明圓周率具有情緒管理能力。',desc:'已知某正方形的四個角分別喜歡星期一、星期三、星期五及無法定義的下午。若冰箱溫度為負三隻企鵝，求出圓周率的職涯規劃。',goal:'證明所有偶數都具有良好的社交禮儀。',score:97},
+{cat:'物理',title:'如何測量光速的尷尬程度？',desc:'一輛不存在的公車以每秒五公升的速度向北方的過去行駛。假設司機是三角形，求出海洋為什麼不會自動更新。',goal:'證明影子在週末具有獨立思考能力。',score:99},
+{cat:'生物',title:'請計算一株盆栽的退休金。',desc:'某隻章魚在星期四完成了九次微積分考試，但其實牠是一張尚未列印的收據。求此時木星的午餐時間。',goal:'證明胡蘿蔔知道如何關閉藍牙。',score:95},
+{cat:'哲學',title:'如果沉默有重量，為什麼門鈴不需要學歷？',desc:'假設所有問號都具有法律人格，且每一條直線都必須在下雨前完成報稅。試求一個不存在的答案是否需要道歉。',goal:'證明存在本身需要一張有效的會員卡。',score:98},
+{cat:'日常',title:'為什麼洗衣機沒有成為國際象棋冠軍？',desc:'已知早餐吃掉了昨天的星期日，而一支鉛筆每走七步便會改變緯度。若窗簾的夢想是當一座山，計算電梯的心情。',goal:'證明襪子失蹤後會轉職成氣象預報員。',score:96},
+{cat:'數學',title:'請求出三角形的味覺座標。',desc:'某數列的第一項是一隻海豹，第二項是一封未寄出的電子郵件，第三項為藍色。求此數列在月球上的法定身高。',goal:'證明零是一位拒絕回答電話的資深教授。',score:94},
+{cat:'物理',title:'證明重力只在午休時間存在。',desc:'若一顆橡皮擦每分鐘產生四片雲，且每片雲都能投票決定星期幾，求出太陽是否符合圖書館的借閱規定。',goal:'計算真空中的尷尬係數。',score:99},
+{cat:'哲學',title:'如何證明昨天其實是一種水果？',desc:'一間沒有牆壁的教室容納了三百個尚未出生的句號。若其中兩個句號正在排隊，請判斷咖啡是否具有歷史意識。',goal:'證明未來的過去需要一份新的使用說明書。',score:97},
+{cat:'生物',title:'為什麼魚類不需要安裝作業系統？',desc:'已知一隻蝸牛以每小時三個念頭的速度背誦量子力學，求出蘋果樹在火星的停車費。',goal:'證明所有細胞都曾經考慮轉行成會計師。',score:93}
+];
+let items=base.map((x,i)=>({...x,id:i+1,origin:'base'}));
+let generatedItem=null;
+const $=id=>document.getElementById(id);
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function loadUserItems(){
+ try{
+  const saved=JSON.parse(localStorage.getItem('paradoxArchiveItems')||'[]');
+  items=[...base.map((x,i)=>({...x,id:i+1,origin:'base'})),...saved];
+ }catch(e){items=base.map((x,i)=>({...x,id:i+1,origin:'base'}))}
+}
+function persist(){
+ try{localStorage.setItem('paradoxArchiveItems',JSON.stringify(items.filter(x=>x.origin==='user')))}catch(e){notify('瀏覽器未允許儲存；目前題目仍可在本頁使用。')}
+}
+function render(){
+ const q=$('search').value.trim().toLowerCase(),cat=$('filter').value,sort=$('sort').value;
+ let list=items.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.goal,x.cat].join(' ').toLowerCase().includes(q));
+ if(sort==='high')list.sort((a,b)=>b.score-a.score);
+ if(sort==='low')list.sort((a,b)=>a.score-b.score);
+ $('count').textContent='ARCHIVE / '+String(list.length).padStart(3,'0');
+ $('metricCount').textContent=String(items.length).padStart(3,'0');
+ $('cards').innerHTML=list.length?list.map(x=>`
+ <article class="card">
+ <div class="cardtop"><span class="id">CASE NO. ${String(x.id).padStart(3,'0')}</span><span class="tag">${esc(x.cat)}</span></div>
+ <h3>${esc(x.title)}</h3>
+ <div class="label">PROBLEM STATEMENT / 題目敘述</div>
+ <div class="description">${esc(x.desc)}</div>
+ <div class="label">REQUIRED PROOF / 指定證明目標</div>
+ <div class="goal">${esc(x.goal)}</div>
+ <div class="cardbottom"><span class="score">錯位指數 ${x.score}/100</span><button class="smallbtn" onclick="showDetails(${x.id})">深入研究 ↗</button></div>
+ </article>`).join(''):'<div class="empty" style="grid-column:1/-1">沒有找到符合條件的研究資料。<br>也許這個問題正在逃避搜尋。</div>';
+}
+function notify(s){
+ $('toast').textContent=s;$('toast').classList.add('show');
+ clearTimeout(notify.t);notify.t=setTimeout(()=>$('toast').classList.remove('show'),2500);
+}
+function showDetails(id){
+ const x=items.find(x=>x.id===id);if(!x)return;
+ $('generated').innerHTML='<strong>研究檔案 CASE '+String(x.id).padStart(3,'0')+'</strong><br>研究問題：'+esc(x.title)+'<br>題目敘述：'+esc(x.desc)+'<br>指定目標：'+esc(x.goal)+'<br>審查意見：三者之間的關係仍待釐清。';
+ $('generated').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function randomQuestion(){
+ const x=items[Math.floor(Math.random()*items.length)];
+ $('search').value='';$('filter').value='all';render();showDetails(x.id);
+}
+const subjects=['星期二的平方根','海豹的退休金','雲朵的社交能力','月亮的禮貌指數','鉛筆的方向感','三角形的味覺座標','電梯的情緒波長','冰箱的哲學博士學位','圓周率的早餐習慣','影子的存款餘額','企鵝的網路速度','沉默的體積'];
+const statements=['已知某台洗衣機連續三天沒有使用電梯，求出海洋的會員密碼。','若星期五的重量等於四隻水母，試計算窗簾的畢業成績。','某個不存在的正方形正在申請駕照，求出木星的午餐折扣。','已知三支鉛筆的影子正在開會，請證明早餐具有逆向傳播能力。','一隻海豹以每分鐘七個逗號的速度游泳，求出三角形的法定年齡。','假設所有句號都能投票，計算冰箱在月球上的稅率。'];
+const goals=['證明所有偶數都擅長說服盆栽。','請求出星期日的立方根與魚缸的距離。','證明沉默需要一張有效的停車證。','求出雲朵轉職成會計師的最低門檻。','證明每一個問號都有自己的午餐時間。','計算月亮對微波爐的信任程度。'];
+const methods=['把未知數轉換成星期五，再對答案進行反向除濕。','先詢問三隻企鵝的意見，再將所有單位改成「一點點」。','使用非線性鬆餅模型，將結論投影到不存在的座標系。','將題目倒轉閱讀，直到主詞自行離開現場。','假設答案是一種液體，並使用理論性湯匙進行測量。'];
+function generate(){
+ const d=Number($('difficulty').value);
+ let s=subjects[Math.floor(Math.random()*subjects.length)];
+ let desc=statements[Math.floor(Math.random()*statements.length)];
+ let goal=goals[Math.floor(Math.random()*goals.length)];
+ if(d===3){
+  s=subjects[Math.floor(Math.random()*subjects.length)]+'，以及它對黑洞的意見？';
+  desc=statements[Math.floor(Math.random()*statements.length)]+'另外，所有研究者必須先取得一張不存在的車票。';
+  goal=goals[Math.floor(Math.random()*goals.length)]+'此處不接受與前述內容相關的證據。';
+ }else if(d===1){
+  desc=statements[Math.floor(Math.random()*statements.length)];
+ }
+ generatedItem={cat:['數學','物理','生物','哲學','日常'][Math.floor(Math.random()*5)],title:'研究問題：'+s,desc,goal,score:Math.min(100,65+d*10+Math.floor(Math.random()*16)),method:methods[Math.floor(Math.random()*methods.length)]};
+ $('generated').innerHTML='<strong>GENERATED PROPOSITION / 合成命題</strong><br><br><b>問題：</b>'+esc(generatedItem.title)+'<br><b>題目敘述：</b>'+esc(desc)+'<br><b>證明目標：</b>'+esc(goal)+'<br><b>建議方法：</b>'+esc(generatedItem.method)+'<br><b>錯位指數：</b>'+generatedItem.score+'/100<br><br><span style="color:#7661bb">審查狀態：敘述與目標尚未建立可辨識的對應關係。</span>';
+}
+function saveGenerated(){
+ if(!generatedItem){notify('請先生成一個命題。');return}
+ const x={...generatedItem,id:Math.max(0,...items.map(a=>a.id))+1,origin:'user'};
+ items.unshift(x);persist();render();notify('命題已收入本機典藏庫。');
+}
+$('submitForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const x={
+  id:Math.max(0,...items.map(a=>a.id))+1,
+  cat:$('newCat').value,
+  title:$('newTitle').value.trim(),
+  desc:$('newDesc').value.trim(),
+  goal:$('newGoal').value.trim(),
+  score:70+Math.floor(Math.random()*31),
+  origin:'user'
+ };
+ if(!x.title||!x.desc||!x.goal){notify('請填寫全部欄位。');return}
+ items.unshift(x);persist();render();e.target.reset();notify('提交成功！研究院暫時不會採取任何行動。');
+ document.getElementById('cards').scrollIntoView({behavior:'smooth'});
+});
+loadUserItems();render();
+</script>
+</body>
+</html>
